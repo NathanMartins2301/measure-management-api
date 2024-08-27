@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "services:up": "docker-compose up -d",
+    "services:stop": "docker-compose stop",
+    "services:down": "docker-compose down",
     "start:dev": "ts-node src/index.ts"
   },
   "keywords": [],
