@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   database:
     container_name: 'postgres-shopper'
@@ -6,3 +8,26 @@ services:
       - .env
     ports:
       - '5432:5432'
+    networks:
+      - app-network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  backend-service:
+    container_name: 'backend-service'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    depends_on:
+      - database
+    networks:
+      - app-network
+
+volumes:
+  postgres-data:
+
+networks:
+  app-network:
+    driver: bridge
